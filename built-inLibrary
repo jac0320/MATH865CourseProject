@@ -1,0 +1,13 @@
+sys 		https://docs.python.org/2/library/sys.html
+types		https://docs.python.org/2/library/types.html
+time		https://docs.python.org/2/library/time.html
+random		https://docs.python.org/2/library/random.html
+os		    https://docs.python.org/2/library/os.html
+traceback 	https://docs.python.org/2/library/traceback.html
+imp		    https://docs.python.org/2/library/imp.html
+re		    https://docs.python.org/2/library/re.html
+argparse	https://docs.python.org/2/library/argparse.html
+math		https://docs.python.org/2/library/math.html
+Tkinter		https://docs.python.org/2/library/tkinter.html
+inspect		https://docs.python.org/2/library/inspect.html
+heapq		https://docs.python.org/2/library/heapq.html
