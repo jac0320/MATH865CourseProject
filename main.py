@@ -154,7 +154,7 @@ class TreeNode(object):
                 new_head._left = self;
                 self._parent = new_head;
 
-        def _rotate_right(self,node):
+        def _rotate_right(self):
             #Implementation going on... Not sure if needed...
             #
             """This function rotate a tree node from left to right
@@ -165,22 +165,22 @@ class TreeNode(object):
                 t  t             t  t
             This can be a useful function called when re-balancing the tree.
             """
-            if node._left is None:
+            if self._left is None:
                 pass
             else:
-                new_head = node._left;
-                node._left = new_head._right;
+                new_head = self._left;
+                self._left = new_head._right;
                 if new_head._right is not None:
-                    new_head._right._parent = node;
-                new_head._parent = node._parent;
-                if node._parent is None:
-                    self.tree = new_head;   #May need modification
-                elif node is node._parent._right:
-                    node._parent._right = new_head;
+                    new_head._right._parent = self;
+                new_head._parent = self._parent;
+                if self._parent is None:
+                    bst3.tree = new_head;   #May need modification
+                elif self is self._parent._right:
+                    self._parent._right = new_head;
                 else:
-                    node._parent._left = new_head;
-                new_head._right = node;
-                node._parent = new_head
+                    self._parent._left = new_head;
+                new_head._right = self;
+                self._parent = new_head
 
         def traverse_infix(self, result = None):
             if result is None:
@@ -242,7 +242,7 @@ class BinarySearchTree(object):
             else:
                 InsertNode = TreeNode(target);
                 node._left = InsertNode;
-                InsertNode._parent = node;
+                node._left._parent = node;
 
         elif target > node._data:
             if node._right:
@@ -250,7 +250,7 @@ class BinarySearchTree(object):
             else:
                 InsertNode = TreeNode(target);
                 node._right = TreeNode(target);
-                InsertNode._parent = node;
+                node._right._parent = node;
         else:
             pass
 
@@ -265,10 +265,10 @@ class BinarySearchTree(object):
             self.tree = new
         elif node._left == old:
             node._left = new
-            new._parent = node
+            node._left._parent = node
         elif node._right == old:
             node._right = new
-            new._parent = node
+            node._left._parent = node
         else:
             assert(False) #May need to change
 
@@ -445,7 +445,7 @@ class RBTree(BinarySearchTree):
             node._parent = new_head
 
 
-people3 = ['Doug','Bob','Alice','Kathy','Tom','Carol']
+people3 = ['Alice','Bob','Carol','Doug','Site','Jobs','Mac','Kathy','UNIX','Tom']
 
 bst3 = BinarySearchTree()
 for p in people3:
@@ -456,15 +456,10 @@ plot_tree(bst3.tree)
 
 #Function Test: TreeNode
 assert isinstance(bst3.tree._left, object)
-TestNode = bst3.tree._left
-print TestNode._data
-assert (TestNode._data == 'Bob')
-ParentTestNode = TestNode._find_parent()
-print ParentTestNode._data
-assert (ParentTestNode._data == 'Doug')
-
-ParentTestNode._rotate_left()
-plot_tree(bst3.tree)
+TestNode = bst3.tree._right._right._right
+assert (TestNode._data == 'Doug')
+TestNode._rotate_left()
+#plot_tree(bst3.tree)
 
 
 
