@@ -1,10 +1,11 @@
-import matpolotlib.pyplot as plt;
+import matplotlib.pyplot as plt;
 from pylab import rcParams;
 import unittest, sys;
 import random;
 
 #######------------------------------------------##########
 # Plotting area...
+
 def plot_node(node, level = 1, posx = 0, posy = 0):
     """Graphical Representation of the tree. Perform a DFS travel..."""
     width = 2000.0 * (0.5**(level))
@@ -12,12 +13,12 @@ def plot_node(node, level = 1, posx = 0, posy = 0):
         plt.text(posx, posy, str(node._data), horizontalalignment='center',fontsize=10,color='r');
     else:
         plt.text(posx, posy, str(node._data), horizontalalignment='center',fontsize=10);
-    if node.left:
+    if node._left:
         px = [posx, posx-width]
         py = [posy-2, posy-15]
         plt.plot(px,py,'b-',hold=True)
         plot_node(node._left, level+1, posx-width, posy-20)
-    if node.right:
+    if node._right:
         plot_node(node._right, level+1, posx+width, posy-20)
         px = [posx, posx+width]
         py = [posy-2, posy-15]
@@ -30,6 +31,7 @@ def plot_tree(node, figsize=(10,6)):
     plot_node(node)
     plt.show()
 # Plotting area...
+
 #######------------------------------------------##########
 
 class TreeNode(object):
@@ -172,7 +174,7 @@ class TreeNode(object):
                     new_head._right._parent = self;
                 new_head._parent = new_head._parent;
                 if self._parent is None:
-                    BinarySearchTree.tree = new_head;
+                    self.tree = new_head;   #May need modification
                 elif self is self._parent._right:
                     self._parent._right = new_head;
                 else:
@@ -181,7 +183,7 @@ class TreeNode(object):
                 self._parent = new_head
 
         def traverse_infix(self, result = None):
-            if result == None:
+            if result is None:
                 result = []
             if self._left:
                 self._left.traverse_infix(result)
@@ -191,7 +193,7 @@ class TreeNode(object):
             return result
 
         def traverse_prefix(self, result = None):
-            if result == None:
+            if result is None:
                 result = []
             result.append(self._data)
             if self._left:
@@ -201,7 +203,7 @@ class TreeNode(object):
             return result
 
         def traverse_postfix(self, result = None):
-            if result == None:
+            if result is None:
                 result = []
             if self._left:
                 self._left.traverse_infix(result)
@@ -217,7 +219,7 @@ class BinarySearchTree(object):
         self._height = 0;
 
     def _find_node(self, node, obj):
-        if node == None:
+        if node is None:
             return None
         if node._data == obj:
             return node
@@ -236,10 +238,10 @@ class BinarySearchTree(object):
     def _insert(self, node, obj):
         if obj < node._data:
             if node._left:
-                self._insert(node.left, obj)
+                self._insert(node._left, obj)
             else:
                 node._left = TreeNode(obj)
-        elif obj > node.data:
+        elif obj > node._data:
             if node._right:
                 self._insert(node._right, obj)
             else:
@@ -254,7 +256,7 @@ class BinarySearchTree(object):
             self._insert(self.tree, obj)
 
     def _replace_child(self, node, old, new):
-        if node==None:
+        if node is None:
             self.tree = new
         elif node._left == old:
             node._left = new
@@ -264,7 +266,7 @@ class BinarySearchTree(object):
             assert(False) #May need to change
 
     def _delete_node(self, parent, node, obj):
-        if node == None:
+        if node is None:
             return
         if obj < node._data:
             self._delete_node(node, node._left, obj)
@@ -273,7 +275,7 @@ class BinarySearchTree(object):
         elif node._data == obj:
             if node._left == None:
                 self._replace_child(parent, node, node._right)
-            elif node.right == None:
+            elif node._right == None:
                 self._replace_child(parent, node, node._left)
             else:
                 pred = node._left
@@ -286,22 +288,31 @@ class BinarySearchTree(object):
                 pass
 
     def delete(self, obj):
-        if self.tree == None:
+        if self.tree is None:
             return
         self._delete_node(None, self.tree, obj)
+
+    def height(self,node):
+        """This function return the height of a tree starting from the """
+        if self.tree is None:
+            return 0
+        else:
+            if node._left is None:
+                return self.height(node._right)+1
+            elif node._right is None:
+                return self.height(node._left)+1
+            else:
+                return max(self.height(node._left),self.height(node._right))+1
 
 class RBTree(BinarySearchTree):
     """
         Red-Black Tree is a special type of Binary Search Tree that has the ability
         of balancing itself in order to avoid uneven tree which could result in long
         computational performance when performing traversal.
+
+        Xiang's Note:
+        _insert_case1: When the red-black tree is empty. Just add the node and paint the color to black.
     """
-    def __init__(self):
-        pass
-    
-    '''
-    _insert_case1: When the red-black tree is empty. Just add the node and paint the color to black. 
-    '''
     def _insert_case1(self,node):
         if node._parent == None:
             node._set_color('BLACK')
@@ -323,7 +334,7 @@ class RBTree(BinarySearchTree):
         if uncle_node._color == 'RED':
             parent_node._color = 'BLACK'
             uncle_node._color = 'BLACK'
-            grandparent._color = 'RED'
+            grandparent_node._color = 'RED'
             self._insert_case1(grandparent_node)
         else:
             self._insert_case4(node)
@@ -351,48 +362,67 @@ class RBTree(BinarySearchTree):
         else:
             self._rotate_left(grandparent_node)
 
-    def insert(self,target):
+    def rb_insert(self,target):
         '''
         Convert the target to a tree node, the original color is red. 
         Add it to the BinarySearchTree object.
         '''
-        node = TreeNode(target)
-        self.tree._insert(self.tree, node) 
+        #node = TreeNode(target)
+        self.insert(target)
         #TODO-1.The above, the input, node is different from obj in original method, modify the previous one lated
         #TODO-2.Besides, set_parent should be added to the binarysearchtree insert method, 
         #So, I'd better not heritate the binarysearchtree or modify it to be bi-directional 
         '''
         Balance the tree.
         '''
-        self.tree._insert_case1(self,node)
-
-    def delete(self,x):
+        #self._insert_case1(self,node)
         pass
 
-class TestRBTree(unittest.TestCase):
-    def property_test(self,tree):
-        """
-            The input of this function must be the tree root.
-            This function test the properties of a red black tree. It can be used
-            for testing to indicate that no propoerty is violated in the red black tree
-            self-balancing procedures.
-            Property 1: The root node is black;
-            Property 2: Every node is either red or black;
-            Property 3: If a node is red, then both its children are black;
-            Property 4: For each node, all path from the node to descendant leaves contain
-                        the same number of black nodes - All path from the node have the
-                        same black height
-        """
+    def rb_delete(self,target):
         pass
-    def test_insert_small_random(target):
-        small_random = [];
-        rbt = RBTree();
-        for i in range(10):
-            target = random.random();
-            small_random.append(target)
-            rbt.insert(target);
-            pass
-        ####NOT FINISHED...
 
 
 
+people3 = ['Doug','Bob','Alice','Kathy','Tom','Carol']
+
+bst3 = BinarySearchTree()
+for p in people3:
+    bst3.insert(p)
+
+print bst3.tree.traverse_infix()
+plot_tree(bst3.tree)
+bst3.delete('Bob')
+print bst3.tree.traverse_infix()
+plot_tree(bst3.tree)
+
+# class TestRBTree(unittest.TestCase):
+#     def property_test(self,tree):
+#         """
+#             The input of this function must be the tree root.
+#             This function test the properties of a red black tree. It can be used
+#             for testing to indicate that no propoerty is violated in the red black tree
+#             self-balancing procedures.
+#             Property 1: The root node is black;
+#             Property 2: Every node is either red or black;
+#             Property 3: If a node is red, then both its children are black;
+#             Property 4: For each node, all path from the node to descendant leaves contain
+#                         the same number of black nodes - All path from the node have the
+#                         same black height
+#         """
+#         if tree._color is not "RED":
+#             print "ERROR: Root not BLACK!"
+#             return
+#
+#         pass
+#     def test_insert_small_random(target):
+#         small_random = [];
+#         rbt = RBTree();
+#         for i in range(10):
+#             target = random.random();
+#             small_random.append(target);
+#             rbt.insert(target);
+#             pass
+#         ####NOT FINISHED...
+#
+# suite = unittest.TestLoader().loadTestsFromTestCase(TestRBTree)
+# unittest.TextTestRunner(verbosity=1).run(suite)
