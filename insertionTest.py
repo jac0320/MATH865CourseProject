@@ -1,3 +1,7 @@
+'''
+This file is aimed to test the insertion method of the RBTree
+'''
+
 import matplotlib.pyplot as plt;
 from pylab import rcParams;
 import unittest, sys;
