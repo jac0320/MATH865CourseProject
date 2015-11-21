@@ -3,6 +3,8 @@ from pylab import rcParams;
 import unittest, sys;
 import random;
 
+#######------------------------------------------##########
+# Plotting area...
 def plot_node(node, level = 1, posx = 0, posy = 0):
     """Graphical Representation of the tree. Perform a DFS travel..."""
     width = 2000.0 * (0.5**(level))
@@ -27,10 +29,39 @@ def plot_tree(node, figsize=(10,6)):
     ax.axis('off')
     plot_node(node)
     plt.show()
+# Plotting area...
+#######------------------------------------------##########
 
 class TreeNode(object):
         """
-        #TODO: Description
+        A leaf of a the tree is constructed in here. Since we have a binary tree, each node
+        has at most two children. The left child is the smaller child and the right child is
+        the bigger child. Or you can call minimum and maximum if you prefer.
+                Node
+                /  \
+              min  max
+        The object contains the following properties:
+            _data | _left | _right | _color | _parent;
+            - _data: represent the value of the tree node/leaf;
+            - _left: denotes the left child(object) of the node. It's _data should be less than leaf's value;
+            - _right: denotes the right child(object) of the node. It's _data should be grater than leaf's value;
+            - _color: denotes the color of the node. Only "BLACK" or "RED" is allowed to describe the color;
+            - _parent: denotes the parent(object) of a leaf;
+        The following method are implemented for a tree node for easier implementation of various tree:
+            - _find_parent(), returns parent node/leaf
+            - _find_grandparent(), returns grandparent node/leaf
+            - _find_uncle(), returns uncle node/leaf
+            - _find_left(), returns left child node/leaf
+            - _find_right(), return right child node/leaf
+            - _set_parent(parent_node), change the parent node/leaf
+            - _set_left(left_node), change the left child node/leaf
+            - _set_right(right_node), change the right child node/leaf
+            - _set_color("RED" | "BLACK"), reset color the current node
+            - _rotate_left(), re-form the tree by substituting node/leaf left child with node/leaf
+            - _rotate_right(), re-form the tree by substituting node/leaf right child with node/leaf
+            - traverse_infix
+            - traverse_prefix
+            - traverse_postfix
         """
         def __init__(self,data,left_child=None,right_child=None):
             """Some basic properties that I am thinking of..."""
@@ -182,7 +213,8 @@ class TreeNode(object):
 class BinarySearchTree(object):
     """This is the object of binary search tree"""
     def __init__(self):
-        self.tree = None
+        self.tree = None;
+        self._height = 0;
 
     def _find_node(self, node, obj):
         if node == None:
@@ -272,7 +304,7 @@ class RBTree(BinarySearchTree):
     '''
     def _insert_case1(self,node):
         if node._parent == None:
-            node._set_color(BLACK)
+            node._set_color('BLACK')
         else:
             self._insert_case2(node)
 
@@ -334,10 +366,24 @@ class RBTree(BinarySearchTree):
         '''
         self.tree._insert_case1(self,node)
 
-    def delet(self,x):
+    def delete(self,x):
         pass
 
 class TestRBTree(unittest.TestCase):
+    def property_test(self,tree):
+        """
+            The input of this function must be the tree root.
+            This function test the properties of a red black tree. It can be used
+            for testing to indicate that no propoerty is violated in the red black tree
+            self-balancing procedures.
+            Property 1: The root node is black;
+            Property 2: Every node is either red or black;
+            Property 3: If a node is red, then both its children are black;
+            Property 4: For each node, all path from the node to descendant leaves contain
+                        the same number of black nodes - All path from the node have the
+                        same black height
+        """
+        pass
     def test_insert_small_random(target):
         small_random = [];
         rbt = RBTree();
@@ -345,6 +391,7 @@ class TestRBTree(unittest.TestCase):
             target = random.random();
             small_random.append(target)
             rbt.insert(target);
+            pass
         ####NOT FINISHED...
 
 
