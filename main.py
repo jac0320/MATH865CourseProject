@@ -266,8 +266,16 @@ class RBTree(BinarySearchTree):
     """
     def __init__(self):
         """"""
+    '''
+    _insert_case1: When is red-black tree is empty.
+    '''
+    def _insert_case1(node):
+        if 
 
-    def insert(self,target):
+
+    def insert(self,node):
+        self.tree
+
         if self.tree == None:
             self.tree = TreeNode(target)
         else:
