@@ -265,28 +265,80 @@ class RBTree(BinarySearchTree):
         computational performance when performing traversal.
     """
     def __init__(self):
-        """"""
-    '''
-    _insert_case1: When is red-black tree is empty.
-    '''
-    def _insert_case1(node):
-        if 
-
-
-    def insert(self,node):
-        self.tree
-
-        if self.tree == None:
-            self.tree = TreeNode(target)
-        else:
-            #TODO
         pass
+    
+    '''
+    _insert_case1: When the red-black tree is empty. Just add the node and paint the color to black. 
+    '''
+    def _insert_case1(self,node):
+        if node._parent == None:
+            node._set_color(BLACK)
+        else:
+            self._insert_case2(node)
+
+    def _insert_case2(self,node):
+        parent_node = node._find_parent()
+        if parent_node._color == 'BLACK':
+            return
+        else:
+            self._insert_case3(node)
+
+    def _insert_case3(self,node):
+        parent_node = node._find_parent()
+        # The variable names of uncle_node and grandparent_node are different from the previous.
+        uncle_node = node._find_uncle()
+        grandparent_node = node._find_grandparent()
+        if uncle_node._color == 'RED':
+            parent_node._color = 'BLACK'
+            uncle_node._color = 'BLACK'
+            grandparent._color = 'RED'
+            self._insert_case1(grandparent_node)
+        else:
+            self._insert_case4(node)
+
+    def _insert_case4(self,node):
+        parent_node = node._find_parent()
+        grandparent_node = node._find_grandparent()
+
+        if node == parent_node._right and parent_node == grandparent_node._left:
+            self._rotate_left(parent_node)
+            node = node._left
+        elif node == parent_node._left and parent_node == grandparent_node._right:  
+            self._rotate_right(parent_node)
+            node = node._right
+        self._insert_case5(node)
+
+    def _insert_case5(self,node):
+        #Switch the color of current node and its parent
+        parent_node = node._find_parent()
+        grandparent_node = node._find_grandparent()
+        parent_node._color = 'BLACK'
+        grandparent_node._color = 'RED'
+        if node == parent_node._left:
+            self._rotate_right(grandparent_node)
+        else:
+            self._rotate_left(grandparent_node)
+
+    def insert(self,target):
+        '''
+        Convert the target to a tree node, the original color is red. 
+        Add it to the BinarySearchTree object.
+        '''
+        node = TreeNode(target)
+        self.tree._insert(self.tree, node) 
+        #TODO-1.The above, the input, node is different from obj in original method, modify the previous one lated
+        #TODO-2.Besides, set_parent should be added to the binarysearchtree insert method, 
+        #So, I'd better not heritate the binarysearchtree or modify it to be bi-directional 
+        '''
+        Balance the tree.
+        '''
+        self.tree._insert_case1(self,node)
 
     def delet(self,x):
         pass
 
 class TestRBTree(unittest.TestCase):
-    def test_insert_small_random(self):
+    def test_insert_small_random(target):
         small_random = [];
         rbt = RBTree();
         for i in range(10):
