@@ -33,6 +33,14 @@ def plot_tree(node, figsize=(10,6)):
 # Plotting area...
 
 #######------------------------------------------##########
+class NullTreeNode(object):
+    def __init__(self):
+        """
+            This is a test node...
+        """
+        self._data = None;
+        self._parent = None;
+        self._color = "BLACK";
 
 class TreeNode(object):
         """
@@ -68,9 +76,9 @@ class TreeNode(object):
         def __init__(self,data,left_child=None,right_child=None):
             """Some basic properties that I am thinking of..."""
             self._data = data;
-            self._left = left_child;
-            self._right = right_child;
-            self._color = 'RED'    #TODO: may need modification
+            self._left = NullTreeNode();
+            self._right = NullTreeNode();
+            self._color = 'BLACK'    #TODO: may need modification
             self._parent = None
 
         def _find_parent(self):
@@ -126,61 +134,61 @@ class TreeNode(object):
             else:
                 print "Typo! Typo! Use only 'RED' or 'BLACK' for color"
 
-        def _rotate_left(self):
-            #Implementation going on... Not sure if needed...
-            #
-            """This function rotate a tree node from right to left
-                    x             y
-                   / \           / \
-                  t  y    ->    x  t
-                    / \        / \
-                   t  t       t  t
-            This can be a useful function called when re-balancing the tree.
-            """
-            if self._right is None:
-                return
-            else:
-                new_head = self._right;
-                self._right = new_head._left;
-                if new_head._left is not None:
-                    new_head._left._parent = self;
-                new_head._parent = self._parent;
-                if self._parent is None:
-                    bst3.tree = new_head; #Not sure how this should go...
-                elif self is self._parent._left:
-                    self._parent._left = new_head;
-                else:
-                    self._parent._right = new_head;
-                new_head._left = self;
-                self._parent = new_head;
-
-        def _rotate_right(self):
-            #Implementation going on... Not sure if needed...
-            #
-            """This function rotate a tree node from left to right
-                    x             y
-                   / \           / \
-                  y  t    ->    t  x
-                 / \              / \
-                t  t             t  t
-            This can be a useful function called when re-balancing the tree.
-            """
-            if self._left is None:
-                pass
-            else:
-                new_head = self._left;
-                self._left = new_head._right;
-                if new_head._right is not None:
-                    new_head._right._parent = self;
-                new_head._parent = self._parent;
-                if self._parent is None:
-                    bst3.tree = new_head;   #May need modification
-                elif self is self._parent._right:
-                    self._parent._right = new_head;
-                else:
-                    self._parent._left = new_head;
-                new_head._right = self;
-                self._parent = new_head
+        # def _rotate_left(self):
+        #     #Implementation going on... Not sure if needed...
+        #     #
+        #     """This function rotate a tree node from right to left
+        #             x             y
+        #            / \           / \
+        #           t  y    ->    x  t
+        #             / \        / \
+        #            t  t       t  t
+        #     This can be a useful function called when re-balancing the tree.
+        #     """
+        #     if self._right is None:
+        #         return
+        #     else:
+        #         new_head = self._right;
+        #         self._right = new_head._left;
+        #         if new_head._left is not None:
+        #             new_head._left._parent = self;
+        #         new_head._parent = self._parent;
+        #         if self._parent is None:
+        #             treeName.tree = new_head; #Not sure how this should go...
+        #         elif self is self._parent._left:
+        #             self._parent._left = new_head;
+        #         else:
+        #             self._parent._right = new_head;
+        #         new_head._left = self;
+        #         self._parent = new_head;
+        #
+        # def _rotate_right(self):
+        #     #Implementation going on... Not sure if needed...
+        #     #
+        #     """This function rotate a tree node from left to right
+        #             x             y
+        #            / \           / \
+        #           y  t    ->    t  x
+        #          / \              / \
+        #         t  t             t  t
+        #     This can be a useful function called when re-balancing the tree.
+        #     """
+        #     if self._left is None:
+        #         pass
+        #     else:
+        #         new_head = self._left;
+        #         self._left = new_head._right;
+        #         if new_head._right is not None:
+        #             new_head._right._parent = self;
+        #         new_head._parent = self._parent;
+        #         if self._parent is None:
+        #             treeName.tree = new_head;   #May need modification
+        #         elif self is self._parent._right:
+        #             self._parent._right = new_head;
+        #         else:
+        #             self._parent._left = new_head;
+        #         new_head._right = self;
+        #         self._parent = new_head
 
         def traverse_infix(self, result = None):
             if result is None:
@@ -371,14 +379,14 @@ class RBTree(BinarySearchTree):
 
     def rb_insert(self,target):
         '''
-        Convert the target to a tree node, the original color is red. 
+        Convert the target to a tree node, the original color is red.
         Add it to the BinarySearchTree object.
         '''
         #node = TreeNode(target)
         self.insert(target)
         #TODO-1.The above, the input, node is different from target in original method, modify the previous one lated
-        #TODO-2.Besides, set_parent should be added to the binarysearchtree insert method, 
-        #So, I'd better not heritate the binarysearchtree or modify it to be bi-directional 
+        #TODO-2.Besides, set_parent should be added to the binarysearchtree insert method,
+        #So, I'd better not heritate the binarysearchtree or modify it to be bi-directional
         '''
         Balance the tree.
         '''
@@ -445,6 +453,11 @@ class RBTree(BinarySearchTree):
             node._parent = new_head
 
 class TestRBTree(unittest.TestCase):
+    """
+        Test Data
+        NameA : ['Alice','Bob','Carol','Doug','Site','Jobs','Mac','Kathy','UNIX','Tom']
+        NameB : ['Carol','Jobs','Alice','UNIX','Bob','Site','Mac','Doug','Kathy','Tom']
+    """
     def property_test(self,tree):
         """
             The input of this function must be the tree root.
@@ -635,6 +648,7 @@ class TestRBTree(unittest.TestCase):
         assert (TestNode._color == 'RED');
         assert (TestNode._left is None);
         assert (TestNode._right is None);
+
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestRBTree)
 unittest.TextTestRunner(verbosity=1).run(suite)
