@@ -365,9 +365,7 @@ class RBTree(BinarySearchTree):
             self._rotate_right(grandparent_node)
         else:
             self._rotate_left(grandparent_node)
-'''
-Overwrite the _insert method by adding _set_parent method for RBTree class. 
-'''
+
     def _insert(self, node, obj):
         if obj < node._data:
             if node._left:
@@ -404,19 +402,28 @@ Overwrite the _insert method by adding _set_parent method for RBTree class.
     def rb_delete(self,target):
         pass
 
+'''
+The following part is for testing the rb_insert method"
+'''
 
-
+'''
 people3 = ['Doug','Bob','Alice','Kathy','Tom','Carol']
-
 bst3 = BinarySearchTree()
 for p in people3:
     bst3.insert(p)
-
 print bst3.tree.traverse_infix()
 plot_tree(bst3.tree)
 bst3.delete('Bob')
 print bst3.tree.traverse_infix()
 plot_tree(bst3.tree)
+'''
+
+rbt = RBTree()
+for i in range(10):
+             target = random.random();
+             rbt.rb_insert(target);
+
+rbt.traverse_infix() 
 
 # class TestRBTree(unittest.TestCase):
 #     def property_test(self,tree):
