@@ -33,15 +33,6 @@ def plot_tree(node, figsize=(10,6)):
 # Plotting area...
 
 #######------------------------------------------##########
-class NullTreeNode(object):
-    def __init__(self):
-        """
-            This is a test node...
-        """
-        self._data = None;
-        self._parent = None;
-        self._color = "BLACK";
-
 class TreeNode(object):
         """
         A leaf of a the tree is constructed in here. Since we have a binary tree, each node
@@ -67,8 +58,8 @@ class TreeNode(object):
             - _set_left(left_node), change the left child node/leaf
             - _set_right(right_node), change the right child node/leaf
             - _set_color("RED" | "BLACK"), reset color the current node
-            - _rotate_left(), re-form the tree by substituting node/leaf left child with node/leaf
-            - _rotate_right(), re-form the tree by substituting node/leaf right child with node/leaf
+            - *_rotate_left(), re-form the tree by substituting node/leaf left child with node/leaf
+            - *_rotate_right(), re-form the tree by substituting node/leaf right child with node/leaf
             - traverse_infix
             - traverse_prefix
             - traverse_postfix
@@ -76,8 +67,8 @@ class TreeNode(object):
         def __init__(self,data,left_child=None,right_child=None):
             """Some basic properties that I am thinking of..."""
             self._data = data;
-            self._left = NullTreeNode();
-            self._right = NullTreeNode();
+            self._left = None;
+            self._right = None;
             self._color = 'BLACK'    #TODO: may need modification
             self._parent = None
 
@@ -570,85 +561,84 @@ class TestRBTree(unittest.TestCase):
         assert (TestNode._parent._data == 'Mac')
         assert (TestNode._right is None)
         assert (TestNode._left is None)
-    def test_rbt_insert_nameB(self):
-        """
-            rbTree initial test. No deletion.
-            solid results obtained from https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
-            Results looks like:
-                                                Jobs
-                                               /    \
-                                           Carol(R) Site(R)
-                                          /    \   /    \
-                                      Alice  Doug Mac   UNIX
-                                          \       /     /
-                                         Bob(R) Kathy(R)Tom(R)
-        """
-        peopleB = ['Carol','Jobs','Alice','UNIX','Bob','Site','Mac','Doug','Kathy','Tom']
-        rbt1 = RBTree()
-        for p in peopleB:
-            rbt1.insert(p)
-        # Root Test
-        TestNode = rbt1.tree
-        assert (TestNode._data == 'Jobs');
-        assert (TestNode._parent is None);
-        assert (TestNode._color == 'BLACK');
-        # Tree Test: Node Carol
-        TestNode = rbt1.tree._left
-        assert (TestNode._data == 'Carol');
-        assert (TestNode._parent._data == 'Jobs');
-        assert (TestNode._color == 'RED');
-        # Tree Test: Node Alice
-        TestNode = rbt1.tree._left._left
-        assert (TestNode._data == 'Alice');
-        assert (TestNode._parent._data == 'Carol');
-        assert (TestNode._color == 'BLACK');
-        assert (TestNode._left is None);
-        # Tree Test: Node Bob
-        TestNode = rbt1.tree._left._left._right
-        assert (TestNode._data == 'Bob');
-        assert (TestNode._parent._data == 'Alice');
-        assert (TestNode._color == 'RED');
-        assert (TestNode._right is None);
-        assert (TestNode._left is None);
-        # Tree Test: Node Doug
-        TestNode = rbt1.tree._left._right
-        assert (TestNode._data == 'Doug');
-        assert (TestNode._parent._data == 'Carol');
-        assert (TestNode._color == 'BLACK');
-        assert (TestNode._right is None);
-        assert (TestNode._left is None);
-        # Tree Test: Node Site
-        TestNode = rbt1.tree._right
-        assert (TestNode._data == 'Site');
-        assert (TestNode._parent._data == 'Jobs');
-        assert (TestNode._color == 'RED');
-        # Tree Test: Node Mac
-        TestNode = rbt1.tree._right._left
-        assert (TestNode._data == 'Mac');
-        assert (TestNode._parent._data == 'Site');
-        assert (TestNode._color == 'BLACK');
-        assert (TestNode._right is None);
-        # Tree Test: Node Kathy
-        TestNode = rbt1.tree._right._left._left
-        assert (TestNode._data == 'Kathy');
-        assert (TestNode._parent._data == 'Mac');
-        assert (TestNode._color == 'RED');
-        assert (TestNode._left is None);
-        assert (TestNode._right is None);
-        # Tree Test: Node UNIX
-        TestNode = rbt1.tree._right._right
-        assert (TestNode._data == 'UNIX');
-        assert (TestNode._parent._data == 'Site');
-        assert (TestNode._color == 'BLACK');
-        assert (TestNode._right is None);
-        # Tree Test: Node Tom
-        TestNode = rbt1.tree._right._right._left
-        assert (TestNode._data == 'Tom');
-        assert (TestNode._parent._data == 'UNIX');
-        assert (TestNode._color == 'RED');
-        assert (TestNode._left is None);
-        assert (TestNode._right is None);
-
+    # def test_rbt_insert_nameB(self):
+    #     """
+    #         rbTree initial test. No deletion.
+    #         solid results obtained from https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
+    #         Results looks like:
+    #                                             Jobs
+    #                                            /    \
+    #                                        Carol(R) Site(R)
+    #                                       /    \   /    \
+    #                                   Alice  Doug Mac   UNIX
+    #                                       \       /     /
+    #                                      Bob(R) Kathy(R)Tom(R)
+    #     """
+    #     peopleB = ['Carol','Jobs','Alice','UNIX','Bob','Site','Mac','Doug','Kathy','Tom']
+    #     rbt1 = RBTree()
+    #     for p in peopleB:
+    #         rbt1.insert(p)
+    #     # Root Test
+    #     TestNode = rbt1.tree
+    #     assert (TestNode._data == 'Jobs');
+    #     assert (TestNode._parent is None);
+    #     assert (TestNode._color == 'BLACK');
+    #     # Tree Test: Node Carol
+    #     TestNode = rbt1.tree._left
+    #     assert (TestNode._data == 'Carol');
+    #     assert (TestNode._parent._data == 'Jobs');
+    #     assert (TestNode._color == 'RED');
+    #     # Tree Test: Node Alice
+    #     TestNode = rbt1.tree._left._left
+    #     assert (TestNode._data == 'Alice');
+    #     assert (TestNode._parent._data == 'Carol');
+    #     assert (TestNode._color == 'BLACK');
+    #     assert (TestNode._left is None);
+    #     # Tree Test: Node Bob
+    #     TestNode = rbt1.tree._left._left._right
+    #     assert (TestNode._data == 'Bob');
+    #     assert (TestNode._parent._data == 'Alice');
+    #     assert (TestNode._color == 'RED');
+    #     assert (TestNode._right is None);
+    #     assert (TestNode._left is None);
+    #     # Tree Test: Node Doug
+    #     TestNode = rbt1.tree._left._right
+    #     assert (TestNode._data == 'Doug');
+    #     assert (TestNode._parent._data == 'Carol');
+    #     assert (TestNode._color == 'BLACK');
+    #     assert (TestNode._right is None);
+    #     assert (TestNode._left is None);
+    #     # Tree Test: Node Site
+    #     TestNode = rbt1.tree._right
+    #     assert (TestNode._data == 'Site');
+    #     assert (TestNode._parent._data == 'Jobs');
+    #     assert (TestNode._color == 'RED');
+    #     # Tree Test: Node Mac
+    #     TestNode = rbt1.tree._right._left
+    #     assert (TestNode._data == 'Mac');
+    #     assert (TestNode._parent._data == 'Site');
+    #     assert (TestNode._color == 'BLACK');
+    #     assert (TestNode._right is None);
+    #     # Tree Test: Node Kathy
+    #     TestNode = rbt1.tree._right._left._left
+    #     assert (TestNode._data == 'Kathy');
+    #     assert (TestNode._parent._data == 'Mac');
+    #     assert (TestNode._color == 'RED');
+    #     assert (TestNode._left is None);
+    #     assert (TestNode._right is None);
+    #     # Tree Test: Node UNIX
+    #     TestNode = rbt1.tree._right._right
+    #     assert (TestNode._data == 'UNIX');
+    #     assert (TestNode._parent._data == 'Site');
+    #     assert (TestNode._color == 'BLACK');
+    #     assert (TestNode._right is None);
+    #     # Tree Test: Node Tom
+    #     TestNode = rbt1.tree._right._right._left
+    #     assert (TestNode._data == 'Tom');
+    #     assert (TestNode._parent._data == 'UNIX');
+    #     assert (TestNode._color == 'RED');
+    #     assert (TestNode._left is None);
+    #     assert (TestNode._right is None);
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestRBTree)
 unittest.TextTestRunner(verbosity=1).run(suite)
