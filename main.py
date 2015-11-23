@@ -420,9 +420,109 @@ class RBTree(BinarySearchTree):
         #self._insert_case1(self,node)
         pass
 
-    def rb_delete(self,target):
-        pass
+    ###################################
+    ######### under test ##############
 
+    def _find_sibling(self, target):
+        if target._parent is None:
+            raise "calling sibling on root"
+        if target == target._parent._left:
+            return target._parent._right
+        else:
+            return target._parent._left
+
+    def _delete_node(self, parent, node, target):
+        if node is None:
+            return
+        if target < node._data:
+            self._delete_node(node, node._left, target)
+        elif target > node._data:
+            self._delete_node(node, node._right, target)
+        elif node._data == target:
+            if node._left is None:
+                self._replace_child(parent, node, node._right)
+            elif node._right is None:
+                self._replace_child(parent, node, node._left)
+            else:
+                pred = node._left
+                pred_parent = node
+                while pred._right != None:
+                    pred_parent = pred
+                    pred = pred._right
+                node._data = pred._data
+                if pred._color == 'RED':
+                    self._replace_child(pred_parent, pred, pred._left)
+                elif pred._color == 'BLACK':
+                    if pred._left._color = 'RED':
+                        pred._left._color = 'BLACK'
+                        self._replace_child(pred_parent, pred, pred._left)
+                    else:
+                        self._replace_child(pred_parent, pred, pred._left)
+                        self._delete_case1(pred_parent._right)
+                else:
+                    raise "violate the RB tree rule"
+
+    def _delete_case1(self, target):
+        if target._parent is not None:
+            self._delete_case2(target)
+    
+    def _delete_case2(self, target):
+        brother = self._find_sibling(target)
+        if brother is 'RED':
+            brother._color = 'BLACK'
+            target._parent = 'RED'
+            if target == target._parent._left:
+                self._rotate_left(target._parent)
+            else:
+                self._rotate_right(target._parent)
+        self._delete_case3(target)
+        
+    def _delete_case3(self, target):
+        brother = self._find_sibling(target)
+        if target._parent._color is 'BLACK' and brother._color is 'BLACK' and brother._left._color is 'BLACK' and brother._right._color is 'BLACK':
+            brother._color = 'RED'
+            self._delete_case1(target._parent)
+        else:
+            self._delete_case4(target)
+        
+    def _delete_case4(self, target):
+        brother = self._find_sibling(target)
+        if target._parent._color is 'RED' and brother._color is 'BLACK' and brother._left._color is 'BLACK' and brother._right._color is 'BLACK':
+            brother._color = 'RED'
+            target._parent._color = 'BLACK'
+        else:
+            self._delete_case5(target)
+        
+    def _delete_case5(self, target):
+        brother = self._find_sibling(target)
+        if brother._color is 'BLACK':
+            if target == target._parent._left and brother._right._color is 'BLACK' and brother._left._color is 'RED':
+                brother._color = 'RED'
+                brother._left._color = 'BLACK'
+                self._rotate_right(brother)
+            elif target == target._parent._right and brother._left._color is 'BLACK' and brother._right._color is 'RED':
+                brother._color = 'RED'
+                brother._right._color = 'BLACK'
+                self._rotate_left(brother)
+        self._delete_case6(target)
+    
+    def _delete_case6(self, target):
+        brother = self._find_sibling(target)
+        brother._color = target._parent._color
+        target._parent._color = 'BLACK'
+        if target == target._parent._left:
+            brother._right._color = 'BLACK'
+            self._rotate_left(target._parent)
+        else:
+            brother._left._color = 'BLACK'
+            self._rotate_right(target._parent)
+        
+    def rb_delete(self, target):
+        self._delete_node(None, self.tree, target)
+
+	######################################################	
+		
+	
     def _rotate_left(self,node):
         #Implementation going on... Not sure if needed...
         #
