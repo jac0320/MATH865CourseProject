@@ -1,3 +1,4 @@
+
 import matplotlib.pyplot as plt;
 from pylab import rcParams;
 import unittest, sys;
@@ -33,6 +34,13 @@ def plot_tree(node, figsize=(10,6)):
 # Plotting area...
 
 #######------------------------------------------##########
+class NullTreeNode(object):
+    def __init__(self):
+        self._data = None;
+        self._left = None;
+        self._right = None;
+        self._parent = None;
+        self._color = "BLACK"
 class TreeNode(object):
         """
         A leaf of a the tree is constructed in here. Since we have a binary tree, each node
@@ -58,20 +66,18 @@ class TreeNode(object):
             - _set_left(left_node), change the left child node/leaf
             - _set_right(right_node), change the right child node/leaf
             - _set_color("RED" | "BLACK"), reset color the current node
-            - *_rotate_left(), re-form the tree by substituting node/leaf left child with node/leaf
-            - *_rotate_right(), re-form the tree by substituting node/leaf right child with node/leaf
             - traverse_infix
             - traverse_prefix
             - traverse_postfix
         """
-        def __init__(self,data,left_child=None,right_child=None):
+        def __init__(self, data, left_child=None, right_child=None):
             """Some basic properties that I am thinking of..."""
-            self._data = data;
-            self._left = None;
-            self._right = None;
-            self._color = 'BLACK'    #TODO: may need modification
+            self._data = data
+			self._left = NullTreeNode()
+			self._right = NullTreeNode()
+            self._color = 'RED'    #TODO: may need modification
             self._parent = None
-
+		
         def _find_parent(self):
             """Find the parent of a tree node. Could be None."""
             return self._parent
@@ -125,69 +131,13 @@ class TreeNode(object):
             else:
                 print "Typo! Typo! Use only 'RED' or 'BLACK' for color"
 
-        # def _rotate_left(self):
-        #     #Implementation going on... Not sure if needed...
-        #     #
-        #     """This function rotate a tree node from right to left
-        #             x             y
-        #            / \           / \
-        #           t  y    ->    x  t
-        #             / \        / \
-        #            t  t       t  t
-        #     This can be a useful function called when re-balancing the tree.
-        #     """
-        #     if self._right is None:
-        #         return
-        #     else:
-        #         new_head = self._right;
-        #         self._right = new_head._left;
-        #         if new_head._left is not None:
-        #             new_head._left._parent = self;
-        #         new_head._parent = self._parent;
-        #         if self._parent is None:
-        #             treeName.tree = new_head; #Not sure how this should go...
-        #         elif self is self._parent._left:
-        #             self._parent._left = new_head;
-        #         else:
-        #             self._parent._right = new_head;
-        #         new_head._left = self;
-        #         self._parent = new_head;
-        #
-        # def _rotate_right(self):
-        #     #Implementation going on... Not sure if needed...
-        #     #
-        #     """This function rotate a tree node from left to right
-        #             x             y
-        #            / \           / \
-        #           y  t    ->    t  x
-        #          / \              / \
-        #         t  t             t  t
-        #     This can be a useful function called when re-balancing the tree.
-        #     """
-        #     if self._left is None:
-        #         pass
-        #     else:
-        #         new_head = self._left;
-        #         self._left = new_head._right;
-        #         if new_head._right is not None:
-        #             new_head._right._parent = self;
-        #         new_head._parent = self._parent;
-        #         if self._parent is None:
-        #             treeName.tree = new_head;   #May need modification
-        #         elif self is self._parent._right:
-        #             self._parent._right = new_head;
-        #         else:
-        #             self._parent._left = new_head;
-        #         new_head._right = self;
-        #         self._parent = new_head
-
         def traverse_infix(self, result = None):
             if result is None:
                 result = []
-            if self._left:
+            if self._left._data:
                 self._left.traverse_infix(result)
             result.append(self._data)
-            if self._right:
+            if self._right._data:
                 self._right.traverse_infix(result)
             return result
 
@@ -195,22 +145,21 @@ class TreeNode(object):
             if result is None:
                 result = []
             result.append(self._data)
-            if self._left:
+            if self._left._data:
                 self._left.traverse_infix(result)
-            if self._right:
+            if self._right._data:
                 self._right.traverse_infix(result)
             return result
 
         def traverse_postfix(self, result = None):
             if result is None:
                 result = []
-            if self._left:
+            if self._left._data:
                 self._left.traverse_infix(result)
-            if self._right:
+            if self._right._data:
                 self._right.traverse_infix(result)
             result.append(self._data)
             return result
-
 class BinarySearchTree(object):
     """This is the object of binary search tree"""
     def __init__(self):
@@ -236,7 +185,7 @@ class BinarySearchTree(object):
 
     def _insert(self, node, target):
         if target < node._data:
-            if node._left:
+            if node._left._data:
                 self._insert(node._left, target)
             else:
                 InsertNode = TreeNode(target);
@@ -244,7 +193,7 @@ class BinarySearchTree(object):
                 node._left._parent = node;
 
         elif target > node._data:
-            if node._right:
+            if node._right._data:
                 self._insert(node._right, target)
             else:
                 InsertNode = TreeNode(target);
@@ -375,14 +324,15 @@ class RBTree(BinarySearchTree):
         '''
         #node = TreeNode(target)
         self.insert(target)
+		root = self.tree
+        node = self._find_node(root, target)
         #TODO-1.The above, the input, node is different from target in original method, modify the previous one lated
         #TODO-2.Besides, set_parent should be added to the binarysearchtree insert method,
         #So, I'd better not heritate the binarysearchtree or modify it to be bi-directional
         '''
         Balance the tree.
         '''
-        #self._insert_case1(self,node)
-        pass
+        self._insert_case1(self,node)
 
     ###################################
     ######### under test ##############
@@ -543,6 +493,7 @@ class RBTree(BinarySearchTree):
             new_head._right = node;
             node._parent = new_head
 
+'''
 class TestRBTree(unittest.TestCase):
     """
         Test Data
@@ -742,3 +693,4 @@ class TestRBTree(unittest.TestCase):
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestRBTree)
 unittest.TextTestRunner(verbosity=1).run(suite)
+'''
