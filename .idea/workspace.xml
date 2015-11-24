@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f61aa999-bfad-4f32-ad5e-e10e218c0217" name="Default" comment="Verson 0.2.1">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deletionTest.py" afterPath="$PROJECT_DIR$/deletionTest.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MATH865CourseProject.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,11 +43,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="deletionTest.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="deletionTest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/deletionTest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.080213904">
-              <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rbTree_main.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rbTree_main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.30442178">
+              <caret line="415" column="46" selection-start-line="415" selection-start-column="46" selection-end-line="415" selection-end-column="46" />
+              <folding>
+                <element signature="e#1308#1481#0" expanded="false" />
+                <element signature="e#5410#8595#0" expanded="false" />
+                <element signature="e#16495#17476#0" expanded="false" />
+                <element signature="e#17519#23589#0" expanded="false" />
+                <element signature="e#24401#25260#0" expanded="false" />
+                <element signature="e#25307#26903#0" expanded="false" />
+                <element signature="e#26950#29499#0" expanded="false" />
+                <element signature="e#29546#32795#0" expanded="false" />
+                <element signature="e#32842#36261#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testANINEW.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testANINEW.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="62" column="20" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -86,12 +116,15 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/testAniT.py" />
         <option value="$PROJECT_DIR$/deletionTest.py" />
+        <option value="$PROJECT_DIR$/testANINEW.py" />
+        <option value="$PROJECT_DIR$/rbTree_main.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="113" />
     <option name="y" value="23" />
-    <option name="width" value="1280" />
+    <option name="width" value="1167" />
     <option name="height" value="734" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -153,7 +186,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.testAniT">
+  <component name="RunManager" selected="Python.deletionTest">
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -167,23 +200,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MATH865CourseProject" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="testAni" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MATH865CourseProject" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testAni.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -218,6 +234,45 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MATH865CourseProject" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/deletionTest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in rbTree_main" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MATH865CourseProject" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/rbTree_main.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="testANINEW" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MATH865CourseProject" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testANINEW.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -344,18 +399,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.main" />
-      <item index="1" class="java.lang.String" itemvalue="Python.testAni" />
-      <item index="2" class="java.lang.String" itemvalue="Python.testAniT" />
-      <item index="3" class="java.lang.String" itemvalue="Python.deletionTest" />
+      <item index="1" class="java.lang.String" itemvalue="Python.testAniT" />
+      <item index="2" class="java.lang.String" itemvalue="Python.deletionTest" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in rbTree_main" />
+      <item index="4" class="java.lang.String" itemvalue="Python.testANINEW" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.testAniT" />
-        <item index="1" class="java.lang.String" itemvalue="Python.deletionTest" />
-        <item index="2" class="java.lang.String" itemvalue="Python.main" />
-        <item index="3" class="java.lang.String" itemvalue="Python.testAni" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.deletionTest" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in rbTree_main" />
+        <item index="2" class="java.lang.String" itemvalue="Python.testANINEW" />
+        <item index="3" class="java.lang.String" itemvalue="Python.testAniT" />
+        <item index="4" class="java.lang.String" itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -496,8 +553,46 @@
       <option name="project" value="LOCAL" />
       <updated>1448388922778</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Verson 0.2.2">
+      <created>1448392031372</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1448392031372</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="Unittests_in_rbTree_main - 2015.11.24 at 13h 31m 54s.xml">
+      <configuration name="Unittests in rbTree_main" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_rbTree_main - 2015.11.24 at 13h 32m 19s.xml">
+      <configuration name="Unittests in rbTree_main" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_rbTree_main - 2015.11.24 at 13h 32m 42s.xml">
+      <configuration name="Unittests in rbTree_main" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_rbTree_main - 2015.11.24 at 13h 36m 09s.xml">
+      <configuration name="Unittests in rbTree_main" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_rbTree_main - 2015.11.24 at 13h 36m 16s.xml">
+      <configuration name="Unittests in rbTree_main" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_rbTree_main - 2015.11.24 at 13h 39m 24s.xml">
+      <configuration name="Unittests in rbTree_main" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_rbTree_main - 2015.11.24 at 13h 41m 59s.xml">
+      <configuration name="Unittests in rbTree_main" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_rbTree_main - 2015.11.24 at 13h 46m 28s.xml">
+      <configuration name="Unittests in rbTree_main" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_rbTree_main - 2015.11.24 at 13h 49m 12s.xml">
+      <configuration name="Unittests in rbTree_main" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_rbTree_main - 2015.11.24 at 13h 50m 14s.xml">
+      <configuration name="Unittests in rbTree_main" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -509,16 +604,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="734" extended-state="6" />
+    <frame x="113" y="23" width="1167" height="734" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32883242" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32809773" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792208" sideWeight="0.5541958" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.7943128" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3203252" sideWeight="0.493007" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40325204" sideWeight="0.4458042" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4025974" sideWeight="0.4458042" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284553" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -583,7 +678,8 @@
     <MESSAGE value="Verson 0.1" />
     <MESSAGE value="Verson 0.2" />
     <MESSAGE value="Verson 0.2.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Verson 0.2.1" />
+    <MESSAGE value="Verson 0.2.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Verson 0.2.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -597,11 +693,61 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="41" />
+      <option name="time" value="42" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requiredLibrary.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deletionTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbTree_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1308#1481#0" expanded="false" />
+            <element signature="e#5410#8595#0" expanded="false" />
+            <element signature="e#16495#17476#0" expanded="false" />
+            <element signature="e#17519#23589#0" expanded="false" />
+            <element signature="e#24401#25260#0" expanded="false" />
+            <element signature="e#25307#26903#0" expanded="false" />
+            <element signature="e#26950#29499#0" expanded="false" />
+            <element signature="e#29546#32795#0" expanded="false" />
+            <element signature="e#32842#36261#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testANINEW.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="20" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -856,14 +1002,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requiredLibrary.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -879,11 +1017,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/deletionTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.080213904">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testANINEW.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="20" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbTree_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30442178">
+          <caret line="415" column="46" selection-start-line="415" selection-start-column="46" selection-end-line="415" selection-end-column="46" />
+          <folding>
+            <element signature="e#1308#1481#0" expanded="false" />
+            <element signature="e#5410#8595#0" expanded="false" />
+            <element signature="e#16495#17476#0" expanded="false" />
+            <element signature="e#17519#23589#0" expanded="false" />
+            <element signature="e#24401#25260#0" expanded="false" />
+            <element signature="e#25307#26903#0" expanded="false" />
+            <element signature="e#26950#29499#0" expanded="false" />
+            <element signature="e#29546#32795#0" expanded="false" />
+            <element signature="e#32842#36261#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
