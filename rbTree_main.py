@@ -32,9 +32,9 @@ def plot_tree(node, figsize=(10, 6)):
     rcParams['figure.figsize'] = figsize
     fig, ax = plt.subplots()
     ax.axis('off')
-    plot_node(node)
+    plot_node(node,1,500)
     plt.show()
-    
+
 # Plotting area...
 
 class NullTreeNode(object):
@@ -618,10 +618,30 @@ class DEMO_RBTree(BinarySearchTree):
             new_head._right = node;
             node._parent = new_head
 
-# peopleB = ['Carol', 'Jobs', 'Alice', 'UNIX', 'Bob', 'Site', 'Mac', 'Doug', 'Kathy', 'Tom'];
-# rbt1 = DEMO_RBTree();
-# for p in peopleB:
-#     rbt1.rb_insert(p);
+peopleB = ['Carol', 'Jobs', 'Alice', 'UNIX', 'Bob', 'Site', 'Mac', 'Doug', 'Kathy', 'Tom'];
+bst1 = BinarySearchTree()
+for p in peopleB:
+    bst1.insert(p);
+plot_tree(bst1.tree)
+
+rbt1 = RBTree();
+for p in peopleB:
+    rbt1.rb_insert(p);
+plot_tree(rbt1.tree)
+
+peopleA = ['Alice', 'Bob', 'Carol', 'Doug', 'Site', 'Jobs', 'Mac', 'Kathy', 'UNIX', 'Tom'];
+bst2 = BinarySearchTree()
+for p in peopleA:
+    bst2.insert(p);
+plot_tree(bst2.tree)
+
+rbt2 = RBTree();
+for p in peopleA:
+    rbt2.rb_insert(p);
+plot_tree(rbt2.tree)
+
+
+
 
 class TestRBTree(unittest.TestCase):
     """
