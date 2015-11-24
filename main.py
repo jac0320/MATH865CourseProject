@@ -42,124 +42,124 @@ class NullTreeNode(object):
         self._parent = None;
         self._color = "BLACK"
 class TreeNode(object):
-        """
-        A leaf of a the tree is constructed in here. Since we have a binary tree, each node
-        has at most two children. The left child is the smaller child and the right child is
-        the bigger child. Or you can call minimum and maximum if you prefer.
-                Node
-                /  \
-              min  max
-        The object contains the following properties:
-            _data | _left | _right | _color | _parent;
-            - _data: represent the value of the tree node/leaf;
-            - _left: denotes the left child(object) of the node. It's _data should be less than leaf's value;
-            - _right: denotes the right child(object) of the node. It's _data should be grater than leaf's value;
-            - _color: denotes the color of the node. Only "BLACK" or "RED" is allowed to describe the color;
-            - _parent: denotes the parent(object) of a leaf;
-        The following method are implemented for a tree node for easier implementation of various tree:
-            - _find_parent(), returns parent node/leaf
-            - _find_grandparent(), returns grandparent node/leaf
-            - _find_uncle(), returns uncle node/leaf
-            - _find_left(), returns left child node/leaf
-            - _find_right(), return right child node/leaf
-            - _set_parent(parent_node), change the parent node/leaf
-            - _set_left(left_node), change the left child node/leaf
-            - _set_right(right_node), change the right child node/leaf
-            - _set_color("RED" | "BLACK"), reset color the current node
-            - traverse_infix
-            - traverse_prefix
-            - traverse_postfix
-        """
-        def __init__(self, data, left_child=None, right_child=None):
-            """Some basic properties that I am thinking of..."""
-            self._data = data
-			self._left = NullTreeNode()
-			self._right = NullTreeNode()
-            self._color = 'RED'    #TODO: may need modification
-            self._parent = None
-		
-        def _find_parent(self):
-            """Find the parent of a tree node. Could be None."""
-            return self._parent
+	"""
+	A leaf of a the tree is constructed in here. Since we have a binary tree, each node
+	has at most two children. The left child is the smaller child and the right child is
+	the bigger child. Or you can call minimum and maximum if you prefer.
+			Node
+			/  \
+		  min  max
+	The object contains the following properties:
+		_data | _left | _right | _color | _parent;
+		- _data: represent the value of the tree node/leaf;
+		- _left: denotes the left child(object) of the node. It's _data should be less than leaf's value;
+		- _right: denotes the right child(object) of the node. It's _data should be grater than leaf's value;
+		- _color: denotes the color of the node. Only "BLACK" or "RED" is allowed to describe the color;
+		- _parent: denotes the parent(object) of a leaf;
+	The following method are implemented for a tree node for easier implementation of various tree:
+		- _find_parent(), returns parent node/leaf
+		- _find_grandparent(), returns grandparent node/leaf
+		- _find_uncle(), returns uncle node/leaf
+		- _find_left(), returns left child node/leaf
+		- _find_right(), return right child node/leaf
+		- _set_parent(parent_node), change the parent node/leaf
+		- _set_left(left_node), change the left child node/leaf
+		- _set_right(right_node), change the right child node/leaf
+		- _set_color("RED" | "BLACK"), reset color the current node
+		- traverse_infix
+		- traverse_prefix
+		- traverse_postfix
+	"""
+	def __init__(self, data, left_child=None, right_child=None):
+		"""Some basic properties that I am thinking of..."""
+		self._data = data
+		self._left = NullTreeNode()
+		self._right = NullTreeNode()
+		self._color = 'RED'    #TODO: may need modification
+		self._parent = None
+	
+	def _find_parent(self):
+		"""Find the parent of a tree node. Could be None."""
+		return self._parent
 
-        def _find_grandparent(self):
-            """Find the grand parent of a tree node. If grand parent
-                not exist, return None."""
-            if self._parent is None:
-                return None
-            else:
-                parent_node = self._parent
-                return parent_node._parent # Node Sure about this
+	def _find_grandparent(self):
+		"""Find the grand parent of a tree node. If grand parent
+			not exist, return None."""
+		if self._parent is None:
+			return None
+		else:
+			parent_node = self._parent
+			return parent_node._parent # Node Sure about this
 
-        def _find_uncle(self):
-            """Find the uncle of a tree node, namely it's grandparent's other child.
-                If parent is None or no grandparent, return None."""
-            if self._parent is None or self._find_grandparent() is None:
-                return None
-            else:
-                grandpa = self._find_grandparent();
-                if self._parent == grandpa._left:
-                    return grandpa._right
-                else:
-                    return grandpa._left
+	def _find_uncle(self):
+		"""Find the uncle of a tree node, namely it's grandparent's other child.
+			If parent is None or no grandparent, return None."""
+		if self._parent is None or self._find_grandparent() is None:
+			return None
+		else:
+			grandpa = self._find_grandparent();
+			if self._parent == grandpa._left:
+				return grandpa._right
+			else:
+				return grandpa._left
 
-        def _find_left(self):
-            """Find left child of a tree node, return None if not exist"""
-            return self._left;
+	def _find_left(self):
+		"""Find left child of a tree node, return None if not exist"""
+		return self._left;
 
-        def _find_right(self):
-            """Find right child of a tree node, return None if not exist"""
-            return self._right;
+	def _find_right(self):
+		"""Find right child of a tree node, return None if not exist"""
+		return self._right;
 
-        def _set_parent(self,parent):
-            """Update a node's parent"""
-            # May have issue, need test...
-            self._parent = parent;
+	def _set_parent(self,parent):
+		"""Update a node's parent"""
+		# May have issue, need test...
+		self._parent = parent;
 
-        def _set_left(self,left_child):
-            """Update a node's left child with a new tree node."""
-            self._left = left_child;
+	def _set_left(self,left_child):
+		"""Update a node's left child with a new tree node."""
+		self._left = left_child;
 
-        def _set_right(self,right_child):
-            """Update a node's right child with a new tree node."""
-            self._right = right_child
+	def _set_right(self,right_child):
+		"""Update a node's right child with a new tree node."""
+		self._right = right_child
 
-        def _set_color(self,color):
-            """Set a tree node to a new color"""
-            if color == 'RED' or color == 'BLACK':
-                self._color = color;
-            else:
-                print "Typo! Typo! Use only 'RED' or 'BLACK' for color"
+	def _set_color(self,color):
+		"""Set a tree node to a new color"""
+		if color == 'RED' or color == 'BLACK':
+			self._color = color;
+		else:
+			print "Typo! Typo! Use only 'RED' or 'BLACK' for color"
 
-        def traverse_infix(self, result = None):
-            if result is None:
-                result = []
-            if self._left._data:
-                self._left.traverse_infix(result)
-            result.append(self._data)
-            if self._right._data:
-                self._right.traverse_infix(result)
-            return result
+	def traverse_infix(self, result = None):
+		if result is None:
+			result = []
+		if self._left._data:
+			self._left.traverse_infix(result)
+		result.append(self._data)
+		if self._right._data:
+			self._right.traverse_infix(result)
+		return result
 
-        def traverse_prefix(self, result = None):
-            if result is None:
-                result = []
-            result.append(self._data)
-            if self._left._data:
-                self._left.traverse_infix(result)
-            if self._right._data:
-                self._right.traverse_infix(result)
-            return result
+	def traverse_prefix(self, result = None):
+		if result is None:
+			result = []
+		result.append(self._data)
+		if self._left._data:
+			self._left.traverse_infix(result)
+		if self._right._data:
+			self._right.traverse_infix(result)
+		return result
 
-        def traverse_postfix(self, result = None):
-            if result is None:
-                result = []
-            if self._left._data:
-                self._left.traverse_infix(result)
-            if self._right._data:
-                self._right.traverse_infix(result)
-            result.append(self._data)
-            return result
+	def traverse_postfix(self, result = None):
+		if result is None:
+			result = []
+		if self._left._data:
+			self._left.traverse_infix(result)
+		if self._right._data:
+			self._right.traverse_infix(result)
+		result.append(self._data)
+		return result
 class BinarySearchTree(object):
     """This is the object of binary search tree"""
     def __init__(self):
@@ -228,14 +228,14 @@ class BinarySearchTree(object):
         elif target > node._data:
             self._delete_node(node, node._right, target)
         elif node._data == target:
-            if node._left is None:
+            if node._left._data is None:
                 self._replace_child(parent, node, node._right)
-            elif node._right is None:
+            elif node._right._data is None:
                 self._replace_child(parent, node, node._left)
             else:
                 pred = node._left
                 pred_parent = node
-                while pred._right != None:
+                while pred._right._data != None:
                     pred_parent = pred
                     pred = pred._right
                 node._data = pred._data
@@ -353,20 +353,20 @@ class RBTree(BinarySearchTree):
         elif target > node._data:
             self._delete_node(node, node._right, target)
         elif node._data == target:
-            if node._left is None:
+            if node._left._data is None:
                 self._replace_child(parent, node, node._right)
-            elif node._right is None:
+            elif node._right._data is None:
                 self._replace_child(parent, node, node._left)
             else:
                 pred = node._left
                 pred_parent = node
-                while pred._right != None:
+                while pred._right._data != None:
                     pred_parent = pred
                     pred = pred._right
                 node._data = pred._data
                 if pred._color is 'RED':
                     self._replace_child(pred_parent, pred, pred._left)
-                elif pred._color == 'BLACK':
+                elif pred._color is 'BLACK':
                     if pred._left._color is 'RED':
                         pred._left._color = 'BLACK'
                         self._replace_child(pred_parent, pred, pred._left)
