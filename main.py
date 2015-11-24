@@ -75,7 +75,7 @@ class TreeNode(object):
             self._data = data
 			self._left = NullTreeNode()
 			self._right = NullTreeNode()
-            self._color = 'RED'    #TODO: may need modification
+            self._color = 'RED'
             self._parent = None
 		
         def _find_parent(self):
@@ -493,7 +493,7 @@ class RBTree(BinarySearchTree):
             new_head._right = node;
             node._parent = new_head
 
-'''
+
 class TestRBTree(unittest.TestCase):
     """
         Test Data
@@ -693,4 +693,3 @@ class TestRBTree(unittest.TestCase):
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestRBTree)
 unittest.TextTestRunner(verbosity=1).run(suite)
-'''
