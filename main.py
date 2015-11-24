@@ -75,7 +75,7 @@ class TreeNode(object):
             self._data = data
 			self._left = NullTreeNode()
 			self._right = NullTreeNode()
-            self._color = 'RED'
+            self._color = 'RED'    #TODO: may need modification
             self._parent = None
 		
         def _find_parent(self):
@@ -364,10 +364,10 @@ class RBTree(BinarySearchTree):
                     pred_parent = pred
                     pred = pred._right
                 node._data = pred._data
-                if pred._color == 'RED':
+                if pred._color is 'RED':
                     self._replace_child(pred_parent, pred, pred._left)
                 elif pred._color == 'BLACK':
-                    if pred._left._color = 'RED':
+                    if pred._left._color is 'RED':
                         pred._left._color = 'BLACK'
                         self._replace_child(pred_parent, pred, pred._left)
                     else:
@@ -493,7 +493,7 @@ class RBTree(BinarySearchTree):
             new_head._right = node;
             node._parent = new_head
 
-
+'''
 class TestRBTree(unittest.TestCase):
     """
         Test Data
@@ -693,3 +693,4 @@ class TestRBTree(unittest.TestCase):
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestRBTree)
 unittest.TextTestRunner(verbosity=1).run(suite)
+'''
