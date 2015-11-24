@@ -364,10 +364,10 @@ class RBTree(BinarySearchTree):
                     pred_parent = pred
                     pred = pred._right
                 node._data = pred._data
-                if pred._color == 'RED':
+                if pred._color is 'RED':
                     self._replace_child(pred_parent, pred, pred._left)
                 elif pred._color == 'BLACK':
-                    if pred._left._color = 'RED':
+                    if pred._left._color is 'RED':
                         pred._left._color = 'BLACK'
                         self._replace_child(pred_parent, pred, pred._left)
                     else:
