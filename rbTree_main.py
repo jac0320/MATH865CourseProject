@@ -307,8 +307,12 @@ class RBTree(BinarySearchTree):
             self._delete_node(node, node._right, target)
         elif node._data == target:
             if node._left._data is None:
+                if node._color is not 'RED':
+                    self._delete_case1(node)
                 self._replace_child(parent, node, node._right)
             elif node._right._data is None:
+                if node._color  is not 'RED':
+                    self._delete_case1(node)
                 self._replace_child(parent, node, node._left)
             else:
                 pred = node._left
@@ -324,26 +328,26 @@ class RBTree(BinarySearchTree):
                         pred._left._color = 'BLACK'
                         self._replace_child(pred_parent, pred, pred._left)
                     else:
+                        self._delete_case1(pred)
                         self._replace_child(pred_parent, pred, pred._left)
-                        self._delete_case1(pred_parent._right)
                 else:
                     raise "violate the RB tree rule"
 
     def _delete_case1(self, target):
         if target._parent is not None:
             self._delete_case2(target)
-
+    
     def _delete_case2(self, target):
         brother = self._find_sibling(target)
-        if brother is 'RED':
+        if brother._color is 'RED':
             brother._color = 'BLACK'
-            target._parent = 'RED'
-            if target == target._parent._left:
-                self._rotate_left(target._parent)
-            else:
+            target._parent._color = 'RED'
+            if target == target._parent._right:
                 self._rotate_right(target._parent)
+            else:
+                self._rotate_left(target._parent)
         self._delete_case3(target)
-
+        
     def _delete_case3(self, target):
         brother = self._find_sibling(target)
         if target._parent._color is 'BLACK' and brother._color is 'BLACK' and brother._left._color is 'BLACK' and brother._right._color is 'BLACK':
@@ -351,7 +355,7 @@ class RBTree(BinarySearchTree):
             self._delete_case1(target._parent)
         else:
             self._delete_case4(target)
-
+        
     def _delete_case4(self, target):
         brother = self._find_sibling(target)
         if target._parent._color is 'RED' and brother._color is 'BLACK' and brother._left._color is 'BLACK' and brother._right._color is 'BLACK':
@@ -359,20 +363,22 @@ class RBTree(BinarySearchTree):
             target._parent._color = 'BLACK'
         else:
             self._delete_case5(target)
-
+        
     def _delete_case5(self, target):
         brother = self._find_sibling(target)
         if brother._color is 'BLACK':
             if target == target._parent._left and brother._right._color is 'BLACK' and brother._left._color is 'RED':
+            #if brother._right._color is 'BLACK' and brother._left._color is 'RED':
                 brother._color = 'RED'
                 brother._left._color = 'BLACK'
                 self._rotate_right(brother)
             elif target == target._parent._right and brother._left._color is 'BLACK' and brother._right._color is 'RED':
+            #elif brother._left._color is 'BLACK' and brother._right._color is 'RED':
                 brother._color = 'RED'
                 brother._right._color = 'BLACK'
                 self._rotate_left(brother)
         self._delete_case6(target)
-
+    
     def _delete_case6(self, target):
         brother = self._find_sibling(target)
         brother._color = target._parent._color
@@ -383,7 +389,7 @@ class RBTree(BinarySearchTree):
         else:
             brother._left._color = 'BLACK'
             self._rotate_right(target._parent)
-
+        
     def rb_delete(self, target):
         self._delete_node(None, self.tree, target)
 
