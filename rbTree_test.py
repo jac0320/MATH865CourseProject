@@ -34,7 +34,7 @@ def treverse_property_test(node, color_counter=0, total_black=1):
                 color_counter -= 1;
         return
 
-#The following is the test target
+#The following is the test targets
 class TestRBTree(unittest.TestCase):
     """
         Test Data
@@ -71,6 +71,7 @@ class TestRBTree(unittest.TestCase):
         pass
 
     def test_root_insert_delete(self):
+        """Test Root Insertion"""
         bst_test = rbTree_main.RBTree();
         bst_test.rb_insert(5);
         assert (bst_test.tree._data == 5);
@@ -78,7 +79,7 @@ class TestRBTree(unittest.TestCase):
         assert (bst_test.tree._data is None);
         pass
 
-    def test_bst_insert_nameA(self):
+    def test_bst_nameA(self):
         peopleA = ['Alice', 'Bob', 'Carol', 'Doug', 'Site', 'Jobs', 'Mac', 'Kathy', 'UNIX', 'Tom']
         bst1 = rbTree_main.BinarySearchTree()
         for p in peopleA:
@@ -114,7 +115,7 @@ class TestRBTree(unittest.TestCase):
         assert isinstance(TestNode, object)
         assert (TestNode._data == 'Tom')
 
-    def test_bst_insert_nameB(self):
+    def test_bst_nameB(self):
         peopleB = ['Carol', 'Jobs', 'Alice', 'UNIX', 'Bob', 'Site', 'Mac', 'Doug', 'Kathy', 'Tom']
         bst2 = rbTree_main.BinarySearchTree()
         for p in peopleB:
@@ -172,7 +173,7 @@ class TestRBTree(unittest.TestCase):
         assert (TestNode._right._data is None)
         assert (TestNode._left._data is None)
 
-    def test_rbt_insert_nameA(self):
+    def test_rbt_nameA(self):
         """
             rbTree initial test. No deletion.
             solid results obtained from https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
@@ -246,7 +247,7 @@ class TestRBTree(unittest.TestCase):
         assert (TestNode._right._data == None);
         pass
 
-    def test_rbt_insert_nameB(self):
+    def test_rbt_nameB(self):
         """
             rbTree initial test. No deletion.
             solid results obtained from https://www.cs.usfca.edu/~galles/visualization/RedBlack.html

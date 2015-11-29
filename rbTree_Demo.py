@@ -6,7 +6,7 @@ from pylab import rcParams;
 
 
 def plot_node(node, level=1, posx=0, posy=0):
-    """Graphical Representation of the tree. Perform a DFS travel..."""
+    """Graphical Representation of the tree. Perform a DFS travel"""
     width = 1000.0 * (0.5 ** (level))
     if node._color == 'RED':
         plt.text(posx, posy, str(node._data), horizontalalignment='center', fontsize=12, color='r');
@@ -29,7 +29,8 @@ def plot_node(node, level=1, posx=0, posy=0):
         plt.plot(px,py,'b-', hold=True, color='b',visible=False)
 
 
-def plot_tree(node, figsize=(10, 6)):
+def plot_tree(node, figsize=(12, 9)):
+    """Plot the tree by inputting the root node and figure size."""
     rcParams['figure.figsize'] = figsize
     fig, ax = plt.subplots()
     ax.axis('off')
@@ -37,7 +38,8 @@ def plot_tree(node, figsize=(10, 6)):
     plt.show()
 
 
-def plot_two_tree(title,nodeA,nodeB,figsize=(10,8)):
+def plot_two_tree(title,nodeA,nodeB,figsize=(12,9)):
+    """Plot two trees side by side to see comparison."""
     rcParams['figure.figsize'] = figsize;
     fig, ax = plt.subplots();
     plt.subplots_adjust(top=0.8,bottom=0.25);
@@ -49,6 +51,7 @@ def plot_two_tree(title,nodeA,nodeB,figsize=(10,8)):
 
 
 def plot_two_tree_insert(figsize=(12, 8)):
+    """Used to demostrate the insertion opertion and how the trees are rebalance with Red-Black Tree scheme."""
     peopleB = ['Carol', 'Jobs', 'Alice', 'UNIX', 'Bob', 'Site', 'Mac', 'Doug', 'Kathy'];
     rbt = rbTree_main.RBTree();
     for p in peopleB:
@@ -72,6 +75,7 @@ plot_two_tree_insert()
 
 
 def plot_two_tree_delete(figsize=(12,8)):
+    """Used to demostrate the deletion opertion and how the trees are rebalance with Red-Black Tree scheme."""
     peopleB = ['Carol', 'Jobs', 'Alice', 'UNIX', 'Bob', 'Site', 'Mac', 'Doug', 'Kathy'];
     rbt = rbTree_main.RBTree();
     for p in peopleB:
@@ -95,7 +99,8 @@ plot_two_tree_delete()
 
 
 
-#Comparison 1
+#Comparison 1: We use both Binary Search Tree and Red-Black Tree to indicate how the tree end up differently with the
+#               test insertion package peopleB
 peopleB = ['Carol', 'Jobs', 'Alice', 'UNIX', 'Bob', 'Site', 'Mac', 'Doug', 'Kathy'];
 bst1 = rbTree_main.BinarySearchTree()
 for p in peopleB:
@@ -106,7 +111,10 @@ for p in peopleB:
 plot_two_tree('Comparison 1: Binary Search Tree vs Red Black Tree',bst1.tree,rbt1.tree)
 
 
-#Comparison 2
+#Comparison 2: We use both Binary Search Tree and Red-Black Tree to indicate how the tree end up differently with the
+#               test insertion package peopleA. This time, the package is sorted and it will result in a unbalanced tree
+#               when using Binary Search Tree. You can see how Red-Black Tree would rebalance the tree so that the height
+#               is modified to a reasonable level.
 peopleA = ['Alice', 'Bob', 'Carol', 'Doug', 'Site', 'Jobs', 'Mac', 'Kathy', 'UNIX'];
 bst2 = rbTree_main.BinarySearchTree()
 for p in peopleA:

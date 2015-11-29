@@ -1,5 +1,14 @@
+# --------------------------------------------- #
+#    MATH8650 : Course Project
+# --------------------------------------------- #
 
 class NullTreeNode(object):
+    """
+        A Null leaf of a tree is constructed in here. Red-Black Tree requires this node. This leaf doesn't carry any
+        data or children. It is the bottom of a tree. When this node is used, it is connected back to the tree and it's
+        color is set to 'BLACK'.
+    """
+
     def __init__(self):
         self._data = None;
         self._left = None;
@@ -8,9 +17,10 @@ class NullTreeNode(object):
         self._color = "BLACK"
         pass
 
+
 class TreeNode(object):
     """
-        A leaf of a the tree is constructed in here. Since we have a binary tree, each node
+        A leaf of a tree is constructed in here. Since we have a binary tree, each node
         has at most two children. The left child is the smaller child and the right child is
         the bigger child. Or you can call minimum and maximum if you prefer.
                 Node
@@ -86,6 +96,7 @@ class TreeNode(object):
             print "Typo! Typo! Use only 'RED' or 'BLACK' for color"
 
     def traverse_infix(self, result=None):
+        """Conduct a traverse with the infix style. This functions returns a list of traverse results."""
         if result is None:
             result = []
         if self._left._data:
@@ -96,6 +107,7 @@ class TreeNode(object):
         return result
 
     def traverse_prefix(self, result=None):
+        """Conduct a traverse with the prefix style. This functions returns a list of traverse results."""
         if result is None:
             result = []
         result.append(self._data)
@@ -106,6 +118,7 @@ class TreeNode(object):
         return result
 
     def traverse_postfix(self, result=None):
+        """Conduct a traverse with the postfix style. This functions returns a list of traverse results."""
         if result is None:
             result = []
         if self._left._data:
@@ -115,14 +128,22 @@ class TreeNode(object):
         result.append(self._data)
         return result
 
+
 class BinarySearchTree(object):
-    """This is the object of binary search tree"""
+    """
+        A binary Search Tree is constructed as an object in here. Each node/leaf on a binary search tree has two
+        children. In this implementation, the left child is the smaller child while the right child is the bigger
+        one. A tree is referred with the root node by calling the property .tree. With this root node, user can
+        reach any node on the tree. With some implemented functions, you can easily find, insert, delete node on a
+        tree. A empty binary search tree is a tree with no node attached to .tree.
+    """
 
     def __init__(self):
+        """Initilize Tree with no root node on it. """
         self.tree = None;
-        self._height = 0;
 
     def _find_node(self, node, target):
+        """This function finds a target base on a starting node/leaf. Function returns the target node."""
         if node is None:
             return None
         if node._data == target:
@@ -133,6 +154,7 @@ class BinarySearchTree(object):
             return self._find_node(node._right, target)
 
     def is_element(self, target):
+        """This function detects if a certain target is in the tree. It will return True is target is found. False, otherwise"""
         node = self._find_node(self.tree, target)
         if node:
             return True
@@ -140,6 +162,9 @@ class BinarySearchTree(object):
             return False
 
     def _insert(self, node, target):
+        """
+            This function is used internally in this class. It inserts it to the tree's bottom base on the rule(left is smaller) recursively.
+        """
         if target < node._data:
             if node._left._data:
                 self._insert(node._left, target)
@@ -159,12 +184,17 @@ class BinarySearchTree(object):
             pass
 
     def insert(self, target):
+        """
+            This is the external insert function. It takes the input of data.
+            This function transfer the data into a tree node/leaf so as to make insertion.
+        """
         if self.tree == None:
             self.tree = TreeNode(target)
         else:
             self._insert(self.tree, target)
 
     def _replace_child(self, node, old, new):
+        """ This function replace a node's child with a new node/leaf used internally. All input should be treenode object."""
         if node is None:
             self.tree = new
         elif node._left == old:
@@ -177,6 +207,11 @@ class BinarySearchTree(object):
             assert (False)  # May need to change
 
     def _delete_node(self, parent, node, target):
+        """
+            This is a internal function used to delete a certain target in the tree. The function will first find the
+            existing node to be replaced. Then, it will change the link to a new node. Several cases are considered in
+            this function to make sure the deletion will not compromise the binary search tree's property.
+        """
         if node is None:
             return
         if target < node._data:
@@ -199,6 +234,7 @@ class BinarySearchTree(object):
                 pass
 
     def delete(self, target):
+        """This is a external function used to delete a node."""
         if self.tree is None:
             return
         self._delete_node(None, self.tree, target)
@@ -209,23 +245,41 @@ class BinarySearchTree(object):
             return 1
         else:
             if node._left._data is None:
-                return self.height(node._right) + 1
+                return self.height(node._right) + 1;
             elif node._right._data is None:
-                return self.height(node._left) + 1
+                return self.height(node._left) + 1;
             else:
-                return max(self.height(node._left), self.height(node._right)) + 1
+                return max(self.height(node._left), self.height(node._right)) + 1;
+
+    def is_empty(self):
+        """This function is used to check is a tree is empty or not. It will return True is the tree is empty."""
+        if self.tree is None:
+            return True;
+        else:
+            return False;
+
 
 class RBTree(BinarySearchTree):
     """
         Red-Black Tree is a special type of Binary Search Tree that has the ability
         of balancing itself in order to avoid uneven tree which could result in long
         computational performance when performing traversal.
-
-        Xiang's Note:
-        _insert_case1: When the red-black tree is empty. Just add the node and paint the color to black.
+        In this implementation, Red-Black tree inherits Binary Search Tree Class so as to make many of the
+        operations easier for implemnetation.
+        Two operations are mainly considered: insertion / deletion. To perform such operations, two rotation methods
+        are implemented to support the insertion/deletion.
+        The goal of Red-Black Tree is to keep height of a tree small with re-balancing scheme. There are several
+        properties that need to be maintained during all operations.
+        Property 1: The root node is black;
+        Property 2: Every node is either red or black;
+        Property 3: If a node is red, then both its children are black;
+        Property 4: For each node, all path from the node to descendant leaves contain
+                    the same number of black nodes - All path from the node have the
+                    same black height
     """
 
     def _insert_case1(self, node):
+        """Insertion Case 1: Add node directly when tree is empty."""
         if node._parent == None:
             node._set_color('BLACK')
         else:
@@ -275,22 +329,19 @@ class RBTree(BinarySearchTree):
             self._rotate_left(grandparent_node)
 
     def rb_insert(self, target):
-        '''
+        """
         Convert the target to a tree node, the original color is red.
         Add it to the BinarySearchTree object.
-        '''
+        """
         # node = TreeNode(target)
         self.insert(target)
         root = self.tree
         node = self._find_node(root, target)
-        # TODO-1.The above, the input, node is different from target in original method, modify the previous one lated
-        # TODO-2.Besides, set_parent should be added to the binarysearchtree insert method,
-        # So, I'd better not heritate the binarysearchtree or modify it to be bi-directional
-
         # Balance the tree.
         self._insert_case1(node);
 
     def _find_sibling(self, target):
+        """This function is used internally to find a node's sibling/brother. It will return an object."""
         if target._parent is None:
             raise "calling sibling on root"
         if target == target._parent._left:
@@ -299,6 +350,7 @@ class RBTree(BinarySearchTree):
             return target._parent._left
 
     def _delete_node(self, parent, node, target):
+        """This is internal function that summarize the deletion cases with re-balance schemes."""
         if node is None:
             return
         if target < node._data:
@@ -311,7 +363,7 @@ class RBTree(BinarySearchTree):
                     self._delete_case1(node)
                 self._replace_child(parent, node, node._right)
             elif node._right._data is None:
-                if node._color  is not 'RED':
+                if node._color is not 'RED':
                     self._delete_case1(node)
                 self._replace_child(parent, node, node._left)
             else:
@@ -336,7 +388,7 @@ class RBTree(BinarySearchTree):
     def _delete_case1(self, target):
         if target._parent is not None:
             self._delete_case2(target)
-    
+
     def _delete_case2(self, target):
         brother = self._find_sibling(target)
         if brother._color is 'RED':
@@ -347,7 +399,7 @@ class RBTree(BinarySearchTree):
             else:
                 self._rotate_left(target._parent)
         self._delete_case3(target)
-        
+
     def _delete_case3(self, target):
         brother = self._find_sibling(target)
         if target._parent._color is 'BLACK' and brother._color is 'BLACK' and brother._left._color is 'BLACK' and brother._right._color is 'BLACK':
@@ -355,7 +407,7 @@ class RBTree(BinarySearchTree):
             self._delete_case1(target._parent)
         else:
             self._delete_case4(target)
-        
+
     def _delete_case4(self, target):
         brother = self._find_sibling(target)
         if target._parent._color is 'RED' and brother._color is 'BLACK' and brother._left._color is 'BLACK' and brother._right._color is 'BLACK':
@@ -363,22 +415,22 @@ class RBTree(BinarySearchTree):
             target._parent._color = 'BLACK'
         else:
             self._delete_case5(target)
-        
+
     def _delete_case5(self, target):
         brother = self._find_sibling(target)
         if brother._color is 'BLACK':
             if target == target._parent._left and brother._right._color is 'BLACK' and brother._left._color is 'RED':
-            #if brother._right._color is 'BLACK' and brother._left._color is 'RED':
+                # if brother._right._color is 'BLACK' and brother._left._color is 'RED':
                 brother._color = 'RED'
                 brother._left._color = 'BLACK'
                 self._rotate_right(brother)
             elif target == target._parent._right and brother._left._color is 'BLACK' and brother._right._color is 'RED':
-            #elif brother._left._color is 'BLACK' and brother._right._color is 'RED':
+                # elif brother._left._color is 'BLACK' and brother._right._color is 'RED':
                 brother._color = 'RED'
                 brother._right._color = 'BLACK'
                 self._rotate_left(brother)
         self._delete_case6(target)
-    
+
     def _delete_case6(self, target):
         brother = self._find_sibling(target)
         brother._color = target._parent._color
@@ -389,8 +441,9 @@ class RBTree(BinarySearchTree):
         else:
             brother._left._color = 'BLACK'
             self._rotate_right(target._parent)
-        
+
     def rb_delete(self, target):
+        """This is a externally used deletion function. User need to input a target which is a data."""
         self._delete_node(None, self.tree, target)
 
     def _rotate_left(self, node):
@@ -448,4 +501,3 @@ class RBTree(BinarySearchTree):
                 node._parent._left = new_head;
             new_head._right = node;
             node._parent = new_head
-
