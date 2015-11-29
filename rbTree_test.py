@@ -1,14 +1,7 @@
 import unittest, sys;
 import rbTree_main;
 
-class TestRBTree(unittest.TestCase):
-    """
-        Test Data
-        NameA : ['Alice','Bob','Carol','Doug','Site','Jobs','Mac','Kathy','UNIX','Tom']
-        NameB : ['Carol','Jobs','Alice','UNIX','Bob','Site','Mac','Doug','Kathy','Tom']
-    """
-
-    def property_test(self, tree):
+def treverse_property_test(node, color_counter=0, total_black=1):
         """
             The input of this function must be the tree root.
             This function test the properties of a red black tree. It can be used
@@ -21,16 +14,60 @@ class TestRBTree(unittest.TestCase):
                         the same number of black nodes - All path from the node have the
                         same black height
         """
-        # Test Property 1
-        number_pack = [4,5,3,2,7,9,9,10,15];
-        rbt_test = rbTree_main.RBTree();
-        for p in number_pack:
-            rbt_test.rb_delete(p);
-        assert (rbt_test.tree._color is "BLACK")
-        # Test Property 2
-        # Test Property 3
-        # Test Property 4
+        assert (node._color is 'BLACK' or node._color is 'RED')
+        if node._color is 'RED':
+            assert(node._left._color is 'BLACK');
+            assert(node._right._color is 'BLACK');
+        if node._left._data is None and node._right._data is None:
+            assert (color_counter == total_black)
+        if node._left._data is not None:
+            if node._left._color is 'BLACK':
+                color_counter += 1;
+            treverse_property_test(node._left,color_counter,total_black);
+            if node._left._color is 'BLACK':
+                color_counter -= 1;
+        if node._right._data is not None:
+            if node._right._color is 'BLACK':
+                color_counter += 1;
+            treverse_property_test(node._right,color_counter,total_black);
+            if node._right._color is 'BLACK':
+                color_counter -= 1;
+        return
 
+#The following is the test target
+class TestRBTree(unittest.TestCase):
+    """
+        Test Data
+        NameA : ['Alice','Bob','Carol','Doug','Site','Jobs','Mac','Kathy','UNIX','Tom']
+        NameB : ['Carol','Jobs','Alice','UNIX','Bob','Site','Mac','Doug','Kathy','Tom']
+    """
+
+    def property_test(self):
+        """
+            The input of this function must be the tree root.
+            This function test the properties of a red black tree. It can be used
+            for testing to indicate that no propoerty is violated in the red black tree
+            self-balancing procedures.
+            Property 1: The root node is black;
+            Property 2: Every node is either red or black;
+            Property 3: If a node is red, then both its children are black;
+            Property 4: For each node, all path from the node to descendant leaves contain
+                        the same number of black nodes - All path from the node have the
+                        same black height
+        """
+        # Test Property 1: The root node is black
+        test_package = [4,5,3,2,7,9,9,10,15];
+        rbt_test = rbTree_main.RBTree();
+        for p in test_package:
+            rbt_test.rb_insert(p);
+        assert (rbt_test.tree._color is "BLACK")
+        start_node = rbt_test.tree;
+        count_black = 1;
+        while start_node._left._data is not None:
+            start_node = start_node._left;
+            if start_node._color is 'BLACK':
+                count_black += 1;
+        treverse_property_test(rbt_test.tree, 1, count_black)
         pass
 
     def test_root_insert_delete(self):
@@ -288,7 +325,6 @@ class TestRBTree(unittest.TestCase):
         assert (TestNode._color == 'RED');
         assert (TestNode._left._data is None);
         assert (TestNode._right._data is None);
-
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestRBTree)
 unittest.TextTestRunner(verbosity=1).run(suite)

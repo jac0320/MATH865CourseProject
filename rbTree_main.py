@@ -205,12 +205,12 @@ class BinarySearchTree(object):
 
     def height(self, node):
         """This function return the height of a tree starting from the """
-        if self.tree is None:
-            return 0
+        if node._left._data is None and node._right._data is None:
+            return 1
         else:
-            if node._left is None:
+            if node._left._data is None:
                 return self.height(node._right) + 1
-            elif node._right is None:
+            elif node._right._data is None:
                 return self.height(node._left) + 1
             else:
                 return max(self.height(node._left), self.height(node._right)) + 1
