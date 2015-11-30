@@ -1,4 +1,4 @@
-import unittest, sys;
+import unittest;
 import rbTree_main;
 
 def treverse_property_test(node, color_counter=0, total_black=1):

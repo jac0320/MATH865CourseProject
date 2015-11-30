@@ -56,7 +56,7 @@ def plot_two_tree_insert(figsize=(12, 8)):
     rbt = rbTree_main.RBTree();
     for p in peopleB:
         rcParams['figure.figsize'] = figsize;
-        fig, ax = plt.subplots();
+        fig, ax = plt.subplots()
         plt.subplots_adjust(top=0.83,bottom=0.1);
         ax.axis('off');
         if rbt.tree is not None:
@@ -66,7 +66,8 @@ def plot_two_tree_insert(figsize=(12, 8)):
         rbt.rb_insert(p);
         plot_node(rbt.tree, 1, 2500, 0);
         plt.text(1250, 5, 'Insertion Example: just inserted '+p, horizontalalignment='center', fontsize=15, color='g');
-        plt.text(1250, -63, 'Close this window to see next step...', horizontalalignment='center', fontsize=15)
+        plt.text(1250, -65, 'Close this window to see next step...', horizontalalignment='center', fontsize=15)
+        plt.get_current_fig_manager()
         plt.show();
     pass
 
@@ -90,7 +91,7 @@ def plot_two_tree_delete(figsize=(12,8)):
             rbt.rb_delete(p);
             plot_node(rbt.tree, 1, 2500, 0);
             plt.text(1250, 5, 'Deletion Example: just deleted '+p, horizontalalignment='center', fontsize=15, color='g');
-            plt.text(1250, -63, 'Close this window to see next step...', horizontalalignment='center', fontsize=15)
+            plt.text(1250, -65, 'Close this window to see next step...', horizontalalignment='center', fontsize=15)
             plt.show();
     pass
 
