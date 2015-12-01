@@ -35,6 +35,8 @@ def plot_tree(node, figsize=(12, 9)):
     fig, ax = plt.subplots()
     ax.axis('off')
     plot_node(node,1,500)
+    mng = plt.get_current_fig_manager()
+    mng.resize(*mng.window.maxsize())
     plt.show()
 
 
@@ -50,7 +52,7 @@ def plot_two_tree(title,nodeA,nodeB,figsize=(12,9)):
     plt.show();
 
 
-def plot_two_tree_insert(figsize=(12, 8)):
+def plot_two_tree_insert(figsize=(12,9)):
     """Used to demostrate the insertion opertion and how the trees are rebalance with Red-Black Tree scheme."""
     peopleB = ['Carol', 'Jobs', 'Alice', 'UNIX', 'Bob', 'Site', 'Mac', 'Doug', 'Kathy'];
     rbt = rbTree_main.RBTree();
@@ -67,7 +69,8 @@ def plot_two_tree_insert(figsize=(12, 8)):
         plot_node(rbt.tree, 1, 2500, 0);
         plt.text(1250, 5, 'Insertion Example: just inserted '+p, horizontalalignment='center', fontsize=15, color='g');
         plt.text(1250, -65, 'Close this window to see next step...', horizontalalignment='center', fontsize=15)
-        plt.get_current_fig_manager()
+        mng = plt.get_current_fig_manager()
+        mng.resize(*mng.window.maxsize())
         plt.show();
     pass
 
@@ -91,7 +94,9 @@ def plot_two_tree_delete(figsize=(12,8)):
             rbt.rb_delete(p);
             plot_node(rbt.tree, 1, 2500, 0);
             plt.text(1250, 5, 'Deletion Example: just deleted '+p, horizontalalignment='center', fontsize=15, color='g');
-            plt.text(1250, -65, 'Close this window to see next step...', horizontalalignment='center', fontsize=15)
+            plt.text(1250, -65, 'Close this window to see next step...', horizontalalignment='center', fontsize=15);
+            mng = plt.get_current_fig_manager()
+            mng.resize(*mng.window.maxsize())
             plt.show();
     pass
 
