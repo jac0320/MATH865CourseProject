@@ -1,5 +1,4 @@
-# MATH865CourseProject
+# A redBlackTree implementation in Python
 
-This is a course project developed by Sufeng Niu, Xiang Zhang, and Site Wang.
+This is a small project developed by Sufeng Niu, Xiang Zhang, and Site Wang.
 
-The GOAL: We are implementing red black tree in python for our course project.
